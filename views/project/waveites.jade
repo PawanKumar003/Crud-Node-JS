@@ -1,0 +1,22 @@
+extends ../layout
+
+block header 
+  .conatainer-fluid
+    include include/navbar.jade
+
+block body
+ 
+  h1 Welcom to waveites Project
+
+
+  .cantainer.mt-4
+    .row
+      .col-6.offset-3
+        .card
+          .card-header
+            h4 login Page
+          .card-body
+            .col-6.m-4
+              a(href="/waveites/login").form-control.btn.btn-primary Login page
+            .col-6.m-4
+              a(href="/waveites/signup").form-control.btn.btn-primary Ragister

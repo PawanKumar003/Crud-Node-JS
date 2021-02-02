@@ -1,0 +1,134 @@
+extends ../layout
+block header
+    .container-fluid
+        .row
+            .col-12
+                include ./includes/navbar.jade
+
+block body
+ 
+    h1 Welcom to Crud sign up
+    .container-fluid.mt-3
+        .row                
+            .col-3
+                input(type="text", class="name")
+                button(type="submit" id="click").btn.btn-primary click
+                input(type="number" id="1")
+                input(type="number" id="2")
+                input( id="3")
+
+                button(type="button" id="add") +
+                button(type="button" id="minus") -
+                button(type="button" id="b") Toggle
+                button(type="button" id="on") ON
+
+                if flash_success_msg != ""
+                    .alert.alert-success 
+                        strong #{flash_success_msg}
+            
+                if flash_error_msg != ""
+                    .alert.alert-error 
+                        strong #{flash_error_msg}  
+
+                if err.info_msg
+                    .alert.alert-success
+                        span #{err.info_msg.msg};
+                form(action="/crud/addcustomer", method="post" id="hide")
+                    .form-group
+                        label(for="name") Name:
+                        input(type="text", name="name").form-control
+                        if err.name
+                            small.text-danger #{err.name.msg};
+                    .form-group
+                        label(for="email") Email Id/Username:
+                        input(type="text", name="email").form-control
+                        if err.email
+                            small.text-danger #{err.email.msg}
+                    .form-group
+                        label(for="phone") Phone:
+                        input(type="text", name="phone").form-control
+                        if err.phone
+                            small.text-danger #{err.phone.msg}
+                    .form-group
+                        label(for="adress") Adress:
+                        input(type="text", name="adress").form-control 
+                        if err.adress
+                            small.text-danger #{err.adress.msg}      
+                    .form-group
+
+    
+                        .row
+                            .col-6
+                                button(type="submit").btn.btn-primary Save
+                            .col-6
+                                a(href="/crud").btn.btn-primary Home page
+            .col-9
+                input#myInput(type='text' placeholder='Search for names..' title='Type in a name')
+
+                ul#myUL
+                    li
+                        a(href='#') Adele
+                    li
+                        a(href='#') Agnes
+                    li
+                        a(href='#') Billy
+                    li
+                        a(href='#') Bob
+                    li
+                        a(href='#') Calvin
+                    li
+                        a(href='#') Christina
+                    li
+                        a(href='#') Cindy
+                table.table.table-bordered.data-list#hide1
+                    thead
+                        tr
+                            td Name
+                            td Email
+                            td Phone
+                            td Adress
+                            th
+                            tbody
+                                if cust_data
+                                    each item in cust_data
+                                        tr(id='#{item._id}')
+                                            td #{item.name}
+                                            td #{item.email}
+                                            td #{item.phone}
+                                            td #{item.adress}
+                                            td  
+                                                button(type="button",class="btn btn-sm btn-primary custedit", data-toggle="modal", data-target="#editModal") Edit
+                                                &nbsp;
+                                                button(type="button", class="btn btn-sm btn-danger delete", id="#{item._id}") Delete
+                                                //- a(href="/crud/delete/#{item._id}",class="btn btn-sm btn-danger" onclick="return confirm('Are you sure want to delete it?')") Delete
+    #editModal.modal
+        .modal-dialog
+            .modal-content
+                .modal-header   
+                    h5.modal-title Edit Customer Data
+                    button.close(type="button" data-dismiss="modal") &times;
+                .modal-body
+                    form(action="/crud/updatecustomer", method="post")#custForm
+                        .form-group
+                            label(for="name") Name:
+                            input(type="hidden",name="id")#id
+                            input(type="text", name="name").form-control#name
+                            if err.name
+                                small.text-danger #{err.name.msg};
+                        .form-group
+                            label(for="email") Email Id/Username:
+                            input(type="text", name="email").form-control#email
+                            if err.email
+                                small.text-danger #{err.email.msg}
+                        .form-group
+                            label(for="phone") Phone:
+                            input(type="text", name="phone").form-control#phone
+                            if err.phone
+                                small.text-danger #{err.phone.msg}
+                        .form-group
+                            label(for="adress") Adress:
+                            input(type="text", name="adress").form-control#adress
+                            if err.adress
+                                small.text-danger #{err.adress.msg}      
+                        .form-group
+                            button(type="submit").btn.btn-primary Update

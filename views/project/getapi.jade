@@ -1,0 +1,45 @@
+extends ../layout
+
+block header
+    .container-fluid
+        include ./includes/navbar.jade
+
+block body
+    h1 here is live weather data:
+    style.
+        body {
+            font-family: Verdana;
+            background: green;
+        }
+
+    
+    
+
+
+    //- if main
+    //-     each item in main
+    //-         li #{item.temp}
+
+    h3 Temp. #{tamp}
+    h3 Min Temp. #{min_temp} 
+    h3 Max temp. #{max_temp}
+    h3 what is day. #{weathermain}
+    p#time
+
+
+    .container
+        .row
+            .col-6.text-align: center
+                h1 what
+                
+
+                div
+                    .col-6
+                        .details
+                            .form-group
+                                label Enter Your Name Here;
+                                input(type="text" id="input").form-control
+
+                        div
+                            img(src='../public/images/pawan.jpg/' alt='Girl in a jacket' width="200px" , height="200px",  id="imgchange")
+                        button(type="button" id="mybtn").btn.btn-primary.mt-3 cleck here

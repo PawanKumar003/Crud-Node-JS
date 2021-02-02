@@ -1,0 +1,22 @@
+nav.navbar.navbar-expand-md.bg-dark.navbar-dark
+  // Brand
+  a.navbar-brand(href='#') Navbar
+  // Toggler/collapsibe Button
+  button.navbar-toggler(type='button' data-toggle='collapse' data-target='#collapsibleNavbar')
+    span.navbar-toggler-icon
+  // Navbar links
+  #collapsibleNavbar.collapse.navbar-collapse
+    ul.navbar-nav
+      li.nav-item
+        a.nav-link(href='/users/getapi') Get Api
+      li.nav-item
+        a(href='/users/profile').nav-link Picture Upload
+      //- li.nav-item
+      //-   a(href='/user/adduser').nav-link Add User 
+      li.nav-item
+        a(href='/waveites/customer').nav-link Add Customer   
+    ul.navbar-nav.ml-auto    
+      li.nav-item
+        a(href='/waveites/login') login 
+      li.nav-item
+        a(href='/waveites/signup')  /signup

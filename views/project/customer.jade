@@ -1,0 +1,90 @@
+extends ../layout
+
+block header
+    .container-fluid
+        include ./includes/navbar.jade
+
+block body
+    h1 here is upadte user data:
+
+    .container-fluid
+        .row
+            .col-3
+                if flash_success_msg !=""
+                    .alert.alert-success 
+                        strong #{flash_success_msg}
+            
+                if flash_error_msg !=""
+                    .alert.alert-error 
+                        strong #{flash_error_msg}
+                form(action="/waveites/customer", method="post")
+                    .form-group
+                        label(for="name") Name
+                        input(type="text", name="name", placeHolder="example").form-control
+                        if  err.name
+                                small.text-danger #{err.name.msg}
+                    .form-group
+                        label(for="email") Email
+                        input(type="text",name="email", placeHolder="example@gmail.com").form-control
+                    .form-group
+                        label(for="phone") Phone
+                        input(type="text",name="phone", placeHolder="+91 123456789").form-control
+                    .row
+                        .col-6
+                            button(type="submit").btn.btn-primary Add Data
+                
+            .col-7.ml-4
+                input(type="text" name="input", id="myinput")
+                button(type="button",name="button",id="mybutton") Search
+                table.table.table-bordered.data-list#hide1
+                        thead
+                            tr.text-center
+                                td Name
+                                td Email
+                                td Phone
+                                td Update & Delete
+                                tbody
+                                    if cust_data1
+                                        each item in cust_data1
+                                            tr(id='#{item._id}')
+                                                td #{item.name}
+                                                td #{item.email}
+                                                td #{item.phone}
+                                                td  
+                                                    button(type="button",class="btn btn-sm btn-primary custedit1", data-toggle="modal", data-target="#editModal1") Edit
+                                                    &nbsp;
+                                                    button(type="button", class="btn btn-sm btn-danger  delete1", id="#{item._id}") Delete
+                                                    //- a(href="/crud/delete/#{item._id}",class="btn btn-sm btn-danger" onclick="return confirm('Are you sure want to delete it?')") Delete
+
+
+                            
+    
+    #editModal1.modal
+        .modal-dialog
+            .modal-content
+                .modal-header   
+                    h5.modal-title Edit Customer Data
+                    button.close(type="button" data-dismiss="modal") &times;
+                .modal-body
+                    form(action="/waveites/upcustomer", method="post")#custForma
+                        .form-group
+                            label(for="name") Name:
+                            input(type="hidden",name="id")#id
+                            input(type="text", name="name").form-control#name1
+                            if err.name
+                                small.text-danger #{err.name.msg};
+                        .form-group
+                            label(for="email") Email Id/Username:
+                            input(type="text", name="email").form-control#email1
+                            if err.email
+                                small.text-danger #{err.email.msg}
+                        .form-group
+                            label(for="phone") Phone:
+                            input(type="text", name="phone").form-control#phone1
+                            if err.phone
+                                small.text-danger #{err.phone.msg}    
+                        .form-group
+                            button(type="submit").btn.btn-primary Update
+
+                        
+                    

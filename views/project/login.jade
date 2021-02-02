@@ -1,0 +1,41 @@
+extends ../layout
+
+block header 
+  .conatainer-fluid
+    include include/navbar.jade
+
+block body
+ h1 Welcom to waveites login page
+
+ .container
+    .row
+        .col-6.offset-3
+            //- if err.info_msg
+            //-     .alert.alert-danger #{err.info_msg.msg}
+            if msgs
+                    button.btn.btn-danger #{msgs}
+            .card
+                .card-header
+                    h4 Sign in Page
+                .card-body
+                    form(action="/waveites/login", method="post")
+                        .form-group
+                            label(for="email") Email
+                            input(type="text",name="email",placeHolder="example@gmail.com").form-control
+                            if err.email
+                                small.text-danger #{err.email.msg}
+                        .form-group
+                            label(for="password") Password
+                            input(type="password", name="password",placeHolder="*********").form-control
+                            if err.password
+                                small.text-danger #{err.password.msg}
+
+                        .form-group
+                            .row
+                                .col-4
+                                    button(type="submit").btn.btn-primary Login
+                                .col-4
+                                    a(href="/waveites/signup").btn.btn-primary Ragister
+                                .col-4
+                                    a(href="/waveites").btn.btn-primary Home Page
+                    

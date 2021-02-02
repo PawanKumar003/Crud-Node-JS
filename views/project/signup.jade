@@ -1,0 +1,55 @@
+extends ../layout
+
+block header 
+  .conatainer-fluid
+    include include/navbar.jade
+
+block body
+    h1 welcom to register page
+
+    .container
+        .row
+            .col-6.offset-3
+                if msg
+                    button.btn.btn-success #{msg}
+                if msgs
+                    button.btn.btn-danger #{msgs}
+                
+                .card
+                    .card-header
+                        h4 Data Register
+                    .card-body
+                        form(action="/waveites/signup", method="post")
+                            .form-group
+                                label(for="name") Name
+                                input(type="text",name="name",placeHolder="Name").form-control
+                                if err.name
+                                    small.text-danger #{err.name.msg}
+                            .form-group
+                                label(for="email") Email
+                                input(type="text", name="email", placeHolder="example@gmail.com").form-control
+                                if err.email
+                                    small.text-danger #{err.email.msg}
+                            .form-group
+                                label(for="phone") Phone No.
+                                input(type="text",name="phone",placeHolder="+91 1234567890").form-control
+                                if err.phone
+                                    small.text-danger #{err.phone.msg}
+                            .form-group
+                                label(for="password") Password
+                                input(type="password", name="password",placeHolder="*******").form-control
+                                if err.password
+                                    small.text-danger #{err.password.msg}
+                            .form-group
+                                label(for="cpassword") Comfirm Password
+                                input(type="password",name="cpassword",placeHolder="********").form-control
+                                if err.cpassword
+                                    small.text-danger #{err.cpassword.msg}
+                            .form-group 
+                                .row
+                                    .col-6
+                                        button(type="submit").btn.btn-primary Sign Up
+
+                                    .col-6
+                                        a(href="/waveites").btn.btn-primary Home Page
+                

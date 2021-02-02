@@ -1,0 +1,38 @@
+extends ../layout
+
+block header
+    .container-fluid
+        include includes/navbar.jade
+
+block body
+    h1 welcom to register page
+    
+    data Title #{data.title}
+    br
+    data #{data.description}
+    br
+    data #{data.myfile}
+
+            
+    .col-6.offset-3
+        .card
+            .card-header Add Details
+            .card-body
+                form(action="/waveites/profile", method="post" , enctype="multipart/from-data")
+                    .form-group
+                        label(for="title") Title
+                        input(type="text" name="title").form-control
+                        if err.title
+                            small.text-danger #{err.title.msg}
+                    .form-group
+                        label(for="description") Description
+                        input(type="text" name="description").form-control
+                        if err.description
+                            small.text-danger #{err.description.msg}
+                    .form-group
+                        label(for="file") Picture
+                        input(type="file" name="myfile",).form-control
+                        if err.myfile
+                            small.text-danger #{err.myfile.msg}
+                    .row
+                        button(type="submit").btn.btn-primary Submit

@@ -1,0 +1,52 @@
+extends ../layout
+
+block body
+    .container
+        .row
+            .col.6.offset-3
+                h1 Login Page
+                if err.us_notfnd
+                    .alert.alert-danger
+                        span #{err.us_notfnd.msg}
+                if msg
+                    button.btn.btn.success #{msg}
+                form(action="/crud/login",method="post")
+                    .form-group 
+                        label(for="email") Email ID
+                        input(type="text",name="email",value=((err.email)?err.email.value:'')).form-control
+                        if err.email
+                            small.text-danger #{err.email.msg}
+                    .form-group
+                        label(for="password") Password
+                        input(type="password",name="password").form-control
+                        if err.password
+                            small.text-danger #{err.password.msg}
+                    .form-group
+                        .row
+                            .col-6
+                                button(type="submit").btn.btn-primary Login Page
+                            .col-6
+                                a(href="/crud/signup").btn.btn-primary Ragister
+    //- .container
+    //-     .row
+    //-         .col.6.offset-3
+    //-             h1 login page
+    //-             form(action="/crud/login",method="post")
+    //-                 .form-group
+    //-                     label(for="email") Email ID
+    //-                     input(type="text",name="email").form-control
+    //-                 .form-group
+    //-                     label(for="password") Password
+    //-                     input(type="password",name="password").form-control
+    //-                     br
+    //-                  form-group
+    //-                     .row
+    //-                         .col-6
+    //-                             button(type="submit").btn.btn-primary Login page
+
+    //-                         .col-6
+    //-                             a(href="/crud/signup").btn.btn-link Register account
+    //- if(data.password==password){
+    //-                console.log("-------lo")
+    //-                 res.redirect("dashboard");
+    //-            }

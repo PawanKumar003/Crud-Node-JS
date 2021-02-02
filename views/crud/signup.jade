@@ -1,0 +1,37 @@
+extends ../layout
+
+block body
+ 
+ h1 Welcom to Crud sign up
+
+    .container
+        .row
+            .col-6-offset-3
+                if msg
+                    button.btn.btn-success #{msg}
+                form(action="/crud/signup", method="post")
+                    .form-group
+                        label(for="name") Name:
+                        input(type="text", name="name").form-control
+                        if err.username
+                            small.text-danger #{err.username.msg}
+                    .form-group
+                        label(for="email") Email Id/Username:
+                        input(type="text", name="email",value=((err.email) ? err.email.value : '')).form-control
+                        if err.email
+                            small.text-danger #{err.email.msg}
+                    .form-group
+                        label(for="password") Password
+                        input(type="password", name="password").form-control 
+                        if err.password
+                            small.text-danger #{err.password.msg}   
+                    .form-group
+                        label(for="password") Confirm Password
+                        input(type="password", name="cpassword").form-control        
+                    .form-group
+
+                        .row
+                            .col-6
+                                button(type="submit").btn.btn-primary Ragister
+                            .col-6
+                                a(href="/crud").btn.btn-primary Home page
